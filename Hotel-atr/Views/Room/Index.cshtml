@@ -1,4 +1,12 @@
-﻿<!-- Breadcrumb Area Start-->
+﻿@{
+    Layout = "_Layout";
+}
+@section styles
+{
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+}
+
+<!-- Breadcrumb Area Start-->
 <section class="breadcrumb-area overlay-dark-2 bg-3">
     <div class="container">
         <div class="row">
@@ -215,7 +223,8 @@
                     <h3>NewsLetter Sign-Up</h3>
                     <div class="newsletter-form">
                         <form action="#" id="mc-form" class="mc-form fix">
-                            <input id="mc-email" type="email" name="email" placeholder="Enter your E-mail">
+                            @Html.TextBox("mc-email", "Enter your E-mail")
+                            <!-- <input id="mc-email" type="email" name="email" placeholder="Enter your E-mail">-->
                             <button id="mc-submit" type="submit" class="default-btn">subcribes</button>
                         </form>
                         <!-- mailchimp-alerts Start -->

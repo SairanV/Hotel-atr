@@ -8,5 +8,21 @@ namespace Hotel_atr.Controllers
         {
             return View();
         }
+
+        public IActionResult RoomList()
+        {
+            return View();  
+        }
+
+        public IActionResult RoomDetails()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Subcribes(string email)
+        {
+            return View();
+        }
     }
 }
