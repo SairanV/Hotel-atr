@@ -22,8 +22,6 @@
 
 </head>
 <body>
-
-
     <!-- Header Area Start -->
     <header class="header-area fixed header-sticky">
         <div class="container">
@@ -50,7 +48,9 @@
                     <!-- Mainmenu Start -->
                     <div class="main-menu hidden-xs">
                         <nav>
-                        
+                            @{
+                                Html.RenderPartial("_MainMenu");
+                            }
                         </nav>
                     </div>
                     <!-- Mainmenu End -->
@@ -67,7 +67,7 @@
                                 <ul>
                                     <li><a href="index.html">HOME</a></li>
                                     <li>
-                                        <a href="room-grid.html">ROOMS</a>
+                                        <a href="room-grid.html">ROOS</a>
                                         <ul class="submenu">
                                             <li><a href="room-list.html">ROOM LIST</a></li>
                                             <li><a href="room-details.html">ROOM DETAILS</a></li>
