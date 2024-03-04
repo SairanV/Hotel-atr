@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace Hotel_atr.Controllers
@@ -37,12 +38,33 @@ namespace Hotel_atr.Controllers
                 HttpContext.SignInAsync
                 (CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimIdentity));
             }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Index(string culture = "")
+        {
+            GetCultures(culture);
+
+
             return View();
         }
 
-        public IActionResult Index()
+        public string GetCultures(string code)
         {
-            return View();
+            if (!string.IsNullOrWhiteSpace(code))
+            {
+                CultureInfo.CurrentCulture = new CultureInfo(code);
+
+                CultureInfo.CurrentUICulture = new CultureInfo(code);
+            }
+            return "";
         }
 
         [Authorize]

@@ -15,4 +15,8 @@
     <PackageReference Include="Serilog.Sinks.Seq" Version="5.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\Controllers\" />
+  </ItemGroup>
+
 </Project>
