@@ -1,6 +1,10 @@
 ﻿using Hotel_atr.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Hotel_atr.Controllers
 {
@@ -13,11 +17,35 @@ namespace Hotel_atr.Controllers
             _logger = logger;
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string login, string password) 
+        {
+            if(login == "admin" && password == "admin")
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, login)
+                };
+
+                var claimIdentity = new ClaimsIdentity(claims, login);
+
+                HttpContext.SignInAsync
+                (CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimIdentity));
+            }
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,14 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Services.AddSingleton<Serilog.ILogger>(Log.Logger);
 
+builder.Services.AddAuthentication
+    (CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.LoginPath = "/Home/Login";
+    });
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +45,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
