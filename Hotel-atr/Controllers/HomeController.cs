@@ -12,11 +12,18 @@ namespace Hotel_atr.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private HotelAtrContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            HotelAtrContext db)
         {
             _logger = logger;
+            _db = db;
         }
+
+
+
+
 
         public IActionResult Login()
         {
@@ -50,6 +57,10 @@ namespace Hotel_atr.Controllers
 
         public IActionResult Index(string culture = "")
         {
+
+            var data = _db.Rooms.ToList();
+
+
             GetCultures(culture);
 
 

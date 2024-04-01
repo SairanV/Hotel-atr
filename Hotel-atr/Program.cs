@@ -1,7 +1,10 @@
+using Hotel_atr;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using System.Globalization;
 
@@ -21,6 +24,13 @@ builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connectionString =
+  builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<HotelAtrContext>(options =>
+    options.UseSqlServer(connectionString));
+
 
 builder.Services
     .AddMvc()
